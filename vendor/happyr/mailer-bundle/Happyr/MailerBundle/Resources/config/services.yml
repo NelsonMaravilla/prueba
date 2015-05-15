@@ -1,0 +1,19 @@
+parameters:
+  happyr_mailer.user_class: Happyr\MailerBundle\Services\MailerService
+  happyr.mailer.provider.request.class: Happyr\MailerBundle\Provider\RequestProvider
+
+services:
+  happyr.mailer:
+    class: %happyr_mailer.user_class%
+    arguments:
+      - @mailer
+      - @templating
+      - @service_container
+      - @happyr.mailer.provider.request
+      - name: %happyr_mailer.from.name%
+        email: %happyr_mailer.from.email%
+        errorType: %happyr_mailer.error_type%
+        fakeRequest: %happyr_mailer.fake_request%
+
+  happyr.mailer.provider.request:
+    class: %happyr.mailer.provider.request.class%
